@@ -34,7 +34,7 @@ router.get('/allOrder', authMiddleware, async (req, res) => {
     }
 })
 
-router.patch('/:id', authMiddleware, async (req, res) => {
+router.patch('/updateStatus/:id', authMiddleware, async (req, res) => {
     try {
         const orderId = req.params.id;
         const { status } = req.body;
@@ -49,6 +49,7 @@ router.patch('/:id', authMiddleware, async (req, res) => {
         if (req.user.role !== 'admin') {
             return res.status(403).json({ message: "Access denied" });
         }
+        socket.getIO().emit("orderStatusUpdated", updatedOrder);
         res.status(200).json({ message: 'Order Updated Successfully!', updatedOrder });
     } catch (error) {
         res.status(500).json({ message: error.message });

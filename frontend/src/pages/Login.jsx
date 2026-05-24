@@ -15,8 +15,12 @@ function Login() {
         password,
       });
       localStorage.setItem("token", res.data.token);
-      console.log(res.data);
-      navigate("/menu");
+      localStorage.setItem("role", res.data.role);
+      if (res.data.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/menu");
+      }
     } catch (error) {
       console.log(error.response?.data?.message);
     }

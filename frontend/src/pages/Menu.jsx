@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Menu() {
   const [menuItem, setMenuItem] = useState([]);
   const [cart, setCart] = useState([]);
+   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -43,6 +45,7 @@ function Menu() {
       );
       console.log("Order placed:", res.data);
       setCart([]);
+      navigate("/orders")
     } catch (error) {
       console.log(error.response?.data?.message);
     }
