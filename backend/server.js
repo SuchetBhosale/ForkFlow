@@ -6,6 +6,7 @@ const MONGO_URI = process.env.MONGO_URI;
 const userRoutes = require('./routes/userRoutes');
 const menuItemRoutes = require('./routes/menuItemRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const aiRoutes = require("./routes/aiRoutes");
 const http = require('http');
 const { Server } = require('socket.io');
 const socket = require('./socket');
@@ -43,5 +44,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/menuItem', menuItemRoutes);
 
 app.use('/api/orders', orderRoutes);
+
+app.use("/api/ai", aiRoutes);
 
 server.listen(PORT, () => console.log("Server Started!"));

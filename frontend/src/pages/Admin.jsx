@@ -1,8 +1,10 @@
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Admin() {
+  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     const fetchOrders = async () => {
@@ -52,64 +54,72 @@ function Admin() {
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
-        {columns.map((column) => (
-          <Droppable droppableId={column} key={column}>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                style={{
-                  width: "300px",
-                  minHeight: "500px",
-                  background: "#f4f4f4",
-                  padding: "10px",
-                  borderRadius: "10px",
-                }}
-              >
-                <h2>{column}</h2>
-
-                {orders
-                  .filter((order) => order.status === column)
-                  .map((order, index) => (
-                    <Draggable
-                      key={order._id}
-                      draggableId={order._id}
-                      index={index}
-                    >
-                      {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={{
-                            padding: "10px",
-                            marginBottom: "10px",
-                            background: "white",
-                            borderRadius: "8px",
-                            boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-                            ...provided.draggableProps.style,
-                          }}
-                        >
-                          {order.items.map((item) => (
-                            <p key={item.name}>
-                              {item.name} x {item.quantity}
-                            </p>
-                          ))}
-                          <p>Total: ₹{order.totalPrice}</p>
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        ))}
+    <>
+      <div style={{ padding: "20px" }}>
+        <button onClick={() => navigate("/menu-management")}>
+          Manage Menu
+        </button>
       </div>
-    </DragDropContext>
+      <button onClick={() => navigate("/dashboard")}>Dashboard</button>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div style={{ display: "flex", gap: "20px", padding: "20px" }}>
+          {columns.map((column) => (
+            <Droppable droppableId={column} key={column}>
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  style={{
+                    width: "300px",
+                    minHeight: "500px",
+                    background: "#f4f4f4",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <h2>{column}</h2>
+
+                  {orders
+                    .filter((order) => order.status === column)
+                    .map((order, index) => (
+                      <Draggable
+                        key={order._id}
+                        draggableId={order._id}
+                        index={index}
+                      >
+                        {(provided) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={{
+                              padding: "10px",
+                              marginBottom: "10px",
+                              background: "white",
+                              borderRadius: "8px",
+                              boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+                              ...provided.draggableProps.style,
+                            }}
+                          >
+                            {order.items.map((item) => (
+                              <p key={item.name}>
+                                {item.name} x {item.quantity}
+                              </p>
+                            ))}
+                            <p>Total: ₹{order.totalPrice}</p>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          ))}
+        </div>
+      </DragDropContext>
+    </>
   );
 }
 

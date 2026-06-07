@@ -6,6 +6,9 @@ import Menu from "../src/pages/Menu";
 import Navbar from "./pages/Navbar";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import Admin from "./pages/Admin";
+import MenuManagement from "./pages/MenuManagement";
+import AdminDashboard from "./pages/AdminDashboard";
+import AIChat from "./pages/AIChat";
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function App() {
           }
         />
         <Route path="/admin" element={<Admin/>} />
+        <Route path="/menu-management" element={<MenuManagement />} />
+        <Route path="/dashboard" element={<AdminDashboard />} />
+        <Route path="/ai" element={<AIChat />} />
       </Routes>
     </BrowserRouter>
   );

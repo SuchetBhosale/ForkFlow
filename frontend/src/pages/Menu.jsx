@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Menu() {
   const [menuItem, setMenuItem] = useState([]);
   const [cart, setCart] = useState([]);
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMenu = async () => {
@@ -45,7 +45,7 @@ function Menu() {
       );
       console.log("Order placed:", res.data);
       setCart([]);
-      navigate("/orders")
+      navigate("/orders");
     } catch (error) {
       console.log(error.response?.data?.message);
     }
@@ -82,6 +82,7 @@ function Menu() {
   return (
     <>
       <h2>Menu</h2>
+      <button onClick={() => navigate("/ai")}>AI Food Assistant</button>
       {menuItem.map((item) => (
         <div key={item._id}>
           <h3>{item.name}</h3>

@@ -26,4 +26,36 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.put('/:id', authMiddleware, async (req, res) => {
+  try {
+    const { name, price, category } = req.body;
+
+    const updatedItem = await menuItem.findByIdAndUpdate(
+      req.params.id,
+      {
+        name,
+        price,
+        category,
+      },
+      { new: true }
+    );
+
+    res.status(200).json(updatedItem);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.delete('/:id', authMiddleware, async (req, res) => {
+  try {
+    await menuItem.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({
+      message: "Menu item deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;
