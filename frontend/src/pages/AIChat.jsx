@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "import.meta.env.VITE_API_URL/api/ai/recommend";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/ai/recommend`;
 const SUGGESTIONS = [
   "What's good for a light lunch?",
   "Suggest something spicy under Rs.200",

@@ -18,7 +18,7 @@ function Admin() {
     (async () => {
       const token = localStorage.getItem("token");
       try {
-        const res = await axios.get("import.meta.env.VITE_API_URL/api/orders/allOrder", {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/orders/allOrder}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setOrders(res.data.orders);
@@ -36,7 +36,7 @@ function Admin() {
     const status = result.destination.droppableId;
     setOrders((p) => p.map((o) => (o._id === id ? { ...o, status } : o)));
     const token = localStorage.getItem("token");
-    await axios.patch(`import.meta.env.VITE_API_URL/api/orders/updateStatus/${id}`, { status }, {
+    await axios.patch(`${import.meta.env.VITE_API_URL}/api/orders/updateStatus/${id}`, { status }, {
       headers: { Authorization: `Bearer ${token}` },
     });
   };

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
 function Orders() {
-  const socket = io("import.meta.env.VITE_API_URL");
+  const socket = io(`${import.meta.env.VITE_API_URL}`);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +11,7 @@ function Orders() {
     const token = localStorage.getItem("token");
     (async () => {
       try {
-        const res = await axios.get("import.meta.env.VITE_API_URL/api/orders/allOrder", { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/orders/allOrder`, { headers: { Authorization: `Bearer ${token}` } });
         setOrders(res.data.orders);
       } catch (err) { console.error(err); }
       finally { setLoading(false); }
