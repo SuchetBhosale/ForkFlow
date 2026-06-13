@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme } from "../redux/themeSlice";
+import { toggleTheme } from "../redux/ThemeSlice";
 
 function Navbar() {
   const location = useLocation();
