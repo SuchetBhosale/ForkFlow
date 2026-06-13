@@ -12,7 +12,7 @@ function AdminDashboard() {
     (async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/api/orders/allOrder", {
+        const res = await axios.get("import.meta.env.VITE_API_URL/api/orders/allOrder", {
           headers: { Authorization: `Bearer ${token}` },
         });
         const orders = res.data.orders;
