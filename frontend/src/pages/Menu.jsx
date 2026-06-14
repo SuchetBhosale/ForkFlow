@@ -13,7 +13,7 @@ function Menu() {
     (async () => {
       const token = localStorage.getItem("token");
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/menuItem`, { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get(`https://forkflow-backend.onrender.com/api/menuItem`, { headers: { Authorization: `Bearer ${token}` } });
         setMenuItem(res.data);
       } catch (err) {
         console.error(err.response?.data?.message);
@@ -31,7 +31,7 @@ function Menu() {
   const handleOrder = async () => {
     const token = localStorage.getItem("token");
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/orders`, { items: cart, totalPrice }, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.post(`https://forkflow-backend.onrender.com/api/orders`, { items: cart, totalPrice }, { headers: { Authorization: `Bearer ${token}` } });
       setCart([]);
       navigate("/orders");
     } catch (err) { console.error(err.response?.data?.message); }

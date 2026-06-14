@@ -15,7 +15,7 @@ function MenuManagement() {
   const fetchMenuItems = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/menuItem`);
+      const res = await axios.get(`https://forkflow-backend.onrender.com/api/menuItem`);
       setMenuItems(res.data);
     } catch (err) {
       setError("Failed to load menu items.");
@@ -32,9 +32,9 @@ function MenuManagement() {
     setError("");
     try {
       if (editId) {
-        await axios.put(`${import.meta.env.VITE_API_URL}/api/menuItem/${editId}`, { name, price: Number(price), category }, { headers: { Authorization: `Bearer ${token}` } });
+        await axios.put(`https://forkflow-backend.onrender.com/api/menuItem/${editId}`, { name, price: Number(price), category }, { headers: { Authorization: `Bearer ${token}` } });
       } else {
-        await axios.post(`${import.meta.env.VITE_API_URL}/api/menuItem/menu`, { name, price: Number(price), category }, { headers: { Authorization: `Bearer ${token}` } });
+        await axios.post(`https://forkflow-backend.onrender.com/api/menuItem/menu`, { name, price: Number(price), category }, { headers: { Authorization: `Bearer ${token}` } });
       }
       resetForm(); fetchMenuItems();
     } catch (err) {
@@ -45,7 +45,7 @@ function MenuManagement() {
   const handleEdit = (item) => { setEditId(item._id); setName(item.name); setPrice(item.price); setCategory(item.category); setError(""); };
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/menuItem/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`https://forkflow-backend.onrender.com/api/menuItem/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       fetchMenuItems();
     } catch (err) { setError("Failed to delete item."); console.error(err); }
   };
