@@ -2,8 +2,9 @@ services:
   - type: web
     name: forkflow-backend
     env: node
-    buildCommand: cd backend && npm install
-    startCommand: cd backend && node server.js
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node server.js
     envVars:
       - key: MONGO_URI
         sync: false
@@ -11,12 +12,18 @@ services:
         sync: false
       - key: GROQ_API_KEY
         sync: false
+      - key: PORT
+        value: 5000
 
   - type: web
     name: forkflow-frontend
     env: static
-    buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: frontend/dist
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://forkflow-backend.onrender.com
     routes:
       - type: rewrite
         source: /*
